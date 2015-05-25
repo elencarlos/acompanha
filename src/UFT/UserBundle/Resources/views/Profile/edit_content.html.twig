@@ -1,0 +1,35 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Editar Perfil</h3>
+
+        <div class="box-tools pull-right">
+            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+    <div class="box-body">
+    <div class="row clearfix">
+        <div class="col-md-offset-1 col-md-4 column">
+            <form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit ">
+                <div class="form-group">
+
+                    {{ form_row(form.username,{'label': 'Usuário:','label_attr' : { 'class' : ' control-label' },'attr' : { 'class' : 'form-control input-md'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.email,{'label': 'E-mail:','label_attr' : { 'class' : 'control-label' },'attr' : { 'class' : 'form-control input-md'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.current_password,{'label_attr' : { 'class' : 'control-label' },'attr' : { 'class' : 'form-control input-md'}}) }}
+                </div>
+
+             <div display="hidden">{{ form_rest(form) }}</div>
+                <div>
+                    <input type="submit" value="{{ 'Alterar'|trans }}" class=" btn btn-default" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
