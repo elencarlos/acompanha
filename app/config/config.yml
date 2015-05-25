@@ -34,7 +34,7 @@ twig:
             src_logo_footer: bundles/app/images/uft.png
             app_name: NomeAPP
             app_subname: Sistema de Base
-            app_skin: skin-green
+            app_skin: skin-blue
 
 # Assetic Configuration
 assetic:
@@ -83,3 +83,39 @@ fos_user:
     db_driver: orm
     firewall_name: main # nombre anterior
     user_class: UFT\UserBundle\Entity\Usuario
+
+
+fr3d_ldap:
+    driver:
+        host: jaca.uft.edu.br
+        username: uid=acesso,ou=People, o=uft,dc=edu,dc=br
+        password: wpSnlGNDSp
+        baseDn: o=uft,dc=edu,dc=br
+#       port:                389    # Optional
+#       username:            foo    # Optional
+#       password:            bar    # Optional
+        bindRequiresDn:      true   # Optional
+#       baseDn:              ou=users, dc=host, dc=foo   # Optional
+        accountFilterFormat: (&(uid=%s)(|(Professor=1)(Professor=2)(Funcionario=1)(Funcionario=4)(Funcionario=5)(Funcionario=6)(Funcionario=7)))
+#       optReferrals:        false  # Optional
+#       useSsl:              true   # Enable SSL negotiation. Optional
+#       useStartTls:         true   # Enable TLS negotiation. Optional
+#        accountCanonicalForm: 2
+       # ACCTNAME_FORM_BACKSLASH this is only needed if your users have to login with something like HOST\User
+#       accountDomainName: HOST
+#       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
+    user:
+        baseDn: o=uft,dc=edu,dc=br
+#        filter: (| (!(professor=0)) (!(funcionario=0)) )
+        attributes:
+            - { ldap_attr: uid,  user_method: setUsername }
+            - { ldap_attr: mail, user_method: setEmail }
+            - { ldap_attr: idpessoa, user_method: setIdpessoa }
+        # Specify ldap attributes mapping [ldap attribute, user object method]
+#           - { ldap_attr: uid,  user_method: setUsername } # Default
+#           - { ldap_attr: cn,   user_method: setName }     # Optional
+
+#           - { ldap_attr: ...,  user_method: ... }         # Optional
+#   service:
+#       user_manager: fos_user.user_manager          # Overrides default user manager
+#       ldap_manager: fr3d_ldap.ldap_manager.default # Overrides default ldap manager
