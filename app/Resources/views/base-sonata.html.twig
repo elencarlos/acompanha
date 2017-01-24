@@ -1,0 +1,53 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% import "::macro.html.twig" as macro_uft %}
+
+
+ {% block stylesheets %}
+    {{ parent() }}
+     <link rel="stylesheet" href="{{ asset('bundles/tema/vendor/adminlte/dist/css/skins/skin-uft.css') }}">
+ {% endblock %}
+{% block body_attributes %}class="sonata-bc skin-uft fixed"{% endblock %}
+{% block javascripts %}
+    {% block sonata_javascript_config %}
+        <script>
+            window.SONATA_CONFIG = {
+                CONFIRM_EXIT: {% if sonata_admin.adminPool.getOption('confirm_exit') %}true{% else %}false{% endif %},
+                USE_SELECT2: {% if sonata_admin.adminPool.getOption('use_select2') %}true{% else %}false{% endif %},
+                USE_ICHECK: {% if sonata_admin.adminPool.getOption('use_icheck') %}true{% else %}false{% endif %},
+                USE_STICKYFORMS: {% if sonata_admin.adminPool.getOption('use_stickyforms') %}true{% else %}false{% endif %}
+            };
+            window.SONATA_TRANSLATIONS = {
+                CONFIRM_EXIT:  '{{ 'confirm_exit'|trans({}, 'SonataAdminBundle')|escape('js') }}'
+            };
+
+            // http://getbootstrap.com/getting-started/#support-ie10-width
+            if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                var msViewportStyle = document.createElement('style');
+                msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
+                document.querySelector('head').appendChild(msViewportStyle);
+            }
+        </script>
+    {% endblock %}
+
+    {% block sonata_javascript_pool %}
+        {% for javascript in sonata_admin.adminPool.getOption('javascripts', []) %}
+            <script src="{{ asset(javascript) }}"></script>
+        {% endfor %}
+    {% endblock %}
+
+    {% set locale = app.request.locale %}
+    {# localize moment #}
+    {% if locale[:2] != 'en' %}
+        <script src="{{ asset('bundles/sonatacore/vendor/moment/locale/pt-br.js' )}}"></script>
+    {% endif %}
+
+    {# localize select2 #}
+    {% if sonata_admin.adminPool.getOption('use_select2') %}
+        {% if locale == 'pt' %}{% set locale = 'pt_PT' %}{% endif %}
+
+        {# omit default EN locale #}
+        {% if locale[:2] != 'en' %}
+            <script src="{{ asset('bundles/sonatacore/vendor/select2/select2_locale_pt-BR.js') }}"></script>
+        {% endif %}
+    {% endif %}
+{% endblock %}
