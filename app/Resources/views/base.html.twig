@@ -1,229 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="icon" type='image/x-icon' href='{{ asset("favicon.ico") }}?v=2' />
-    <meta charset="UTF-8" />
-    <title>{% block title %}Sistemas UFT | Sistema Ficha Catalográfica!{% endblock %}</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    {% block stylesheets %}
-        {% stylesheets
-        'bundles/app/template/bootstrap/css/bootstrap.css'
-        'bundles/app/template/dist/css/AdminLTE.min.css'
-        'bundles/app/css/bootstrap-theme.min.css'
-        'bundles/app/select2/select2.css'
-        'bundles/app/select2/select2-bootstrap.css'
-        'bundles/app/css/bootstrap-table.css'
-        'bundles/app/template/dist/css/skins/*'
-        filter='cssrewrite'
-        %}
-
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        {% endstylesheets %}
-
+{% extends 'AvanzuAdminThemeBundle:layout:base-layout.html.twig' %}
+{% import "::macro.html.twig" as macro_uft %}
+{% block page_content %}
+    {% block content %}
     {% endblock %}
+{% endblock %}
 
-    {% block javascripts %}
-        {#<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>#}
-        {% javascripts
-        'bundles/app/template/plugins/jQuery/jQuery-2.1.3.min.js'
-        'bundles/app/template/bootstrap/js/bootstrap.min.js'
-        'bundles/app/js/bootstrap-table.js'
-        'bundles/app/js/bootstrap-table-pt-BR.js'
-        'bundles/app/select2/select2.js'
-        'bundles/app/elevatezoom/jquery.elevatezoom.js'
-        'bundles/app/select2/select2_locale_pt-BR.js'
-        'bundles/app/js/ficha.js'
-        'bundles/app/template/dist/js/app.min.js'
-        %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
+{% block title %}Novo{% endblock %}
+{% block page_title %}Novo{% endblock %}
+{% block page_subtitle %}- SubNovo{% endblock %}
 
-<body class="{{ app_skin }} {% if not is_granted("IS_AUTHENTICATED_REMEMBERED") %} sidebar-collapse {% endif %}">
-
-<div class="wrapper">
-
-    <!-- Main Header -->
-    <header class="main-header">
-
-        <!-- Logo -->
-        <a href="{{ path('_welcome') }}" class="logo">
-            <img src={{ asset(src_logo) }}>
-        </a>
-        <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Navega&ccedil;&aatilde;o</span>
-            </a>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-
-
-
-
-                    <!-- Tasks Menu -->
-
-                    <!-- User Account Menu -->
-                    <li class="dropdown user user-menu">
-                        <!-- Menu Toggle Button -->
-
-                        {{ knp_menu_render('AppBundle:Builder:userMenu', {'currentClass': 'active', 'template': 'AppBundle:Menu:knp_menu.html.twig'}) }}
-
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar" >
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-
-                <div class="pull-left info">
-                    {% if  is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <p>{{ app.user }}</p>
-                        <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    {% else %}
-                        <a href="#"><i class="fa fa-circle text-red"></i> Offline</a>
-                    {% endif %}
-
-                </div>
-            </div>
-
-
-            <!-- /.search form -->
-            {{ knp_menu_render('AppBundle:Builder:mainMenu', {'currentClass': 'active', 'template': 'AppBundle:Menu:knp_menu.html.twig'}) }}
-            <!-- Sidebar Menu -->
-
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>{{ app_name }}
-                <small>{{ app_subname }}</small>
-            </h1>
-            {#<ol class="breadcrumb">#}
-                {#<li><a href="#"><i class="fa fa-dashboard"></i> In&iacute;cio</a></li>#}
-                {#<li class="active">Ficha</li>#}
-            {#</ol>#}
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-
-
-            <!-- Conteudo Central -->
-            {% block content %}
-            {% endblock %}
-
-        </section><!-- /.content -->
-
-    </div><!-- /.content-wrapper -->
-
-    <!-- Main Footer -->
+{% block avanzu_admin_footer %}
     <footer class="main-footer">
-        <!-- To the right -->
         <div class="pull-right hidden-xs">
-            <img src={{ asset(src_logo_footer)}}>
+            <b>Version</b> 2.0
         </div>
-        <!-- Default to the left -->
-
-            <span class="left">{{ app_subname }} | Vers&atilde;o 1.0 | D&uacute;vidas: (63) 3232-ramal |{% if  is_granted("IS_AUTHENTICATED_REMEMBERED") %} Logado como: {{ app.user }} {% endif %}
-            </span>
-            <span class="right">
-                © {{ 'now'|date('Y') }} <a href="http://www.uft.edu.br">DTI | Universidade Federal do Tocantins</a>
-            </span>
+        <strong>Copyright &copy; {{ "now"|date("Y") }} <a href="http://uft.edu.br">DTI - UFT</a>.</strong> All rights reserved.
     </footer>
+{% endblock %}
 
-</div><!-- ./wrapper -->
+{% block stylesheets %}
+    {{ parent()}}
+    <link rel="stylesheet" href="{{ asset('bundles/slu/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tema/vendor/adminlte/dist/css/skins/skin-uft.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+{% endblock %}
 
-<!-- REQUIRED JS SCRIPTS -->
-
-
-
-
-<script type="text/javascript">
-    $(function () {
-        $('.button-checkbox').each(function () {
-
-            // Settings
-            var $widget = $(this),
-                    $button = $widget.find('button'),
-                    $checkbox = $widget.find('input:checkbox'),
-                    color = $button.data('color'),
-                    settings = {
-                        on: {
-                            icon: 'fa fa-check'
-                        },
-                        off: {
-                            icon: 'fa fa-female'
-                        }
-                    };
-
-            // Event Handlers
-            $button.on('click', function () {
-                $checkbox.prop('checked', !$checkbox.is(':checked'));
-                $checkbox.triggerHandler('change');
-                updateDisplay();
-            });
-            $checkbox.on('change', function () {
-                updateDisplay();
-            });
-
-            // Actions
-            function updateDisplay() {
-                var isChecked = $checkbox.is(':checked');
-
-                // Set the button's state
-                $button.data('state', (isChecked) ? "on" : "off");
-
-                // Set the button's icon
-                $button.find('.state-icon')
-                        .removeClass()
-                        .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                // Update the button's color
-                if (isChecked) {
-                    $button
-                            .removeClass('btn-default')
-                            .addClass('btn-' + color + ' active');
-                }
-                else {
-                    $button
-                            .removeClass('btn-' + color + ' active')
-                            .addClass('btn-default');
-                }
-            }
-
-            // Initialization
-            function init() {
-
-                updateDisplay();
-
-                // Inject the icon if applicable
-                if ($button.find('.state-icon').length == 0) {
-                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-                }
-            }
-            init();
-        });
-    });
-</script>
-</body>
-</html>

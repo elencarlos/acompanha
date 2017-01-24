@@ -1,0 +1,63 @@
+{% extends "@Gpu/base.html.twig" %}
+{% block content -%}
+    <style>
+        input[type="radio"], input[type="checkbox"] {
+            width: 10%
+        }
+    </style>
+    <div class="page-header">
+        <h1>Usuários do Sistema</h1>
+    </div>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('homepage') }}">
+                Voltar
+            </a>
+        </li>
+    </ul>
+    <div class="well">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <table id="listusers" class="table table-striped" data-toggle="table">
+                    <thead>
+                    <tr>
+                        <th data-field="codigo" class="col-md-1" data-sortable="true">Código</th>
+                        <th data-field="actions" class="col-md-1" data-align="center" data-sortable="true">Login</th>
+                        <th data-field="actions" class="col-md-1" data-align="center" data-sortable="true">Nome</th>
+                        <th data-field="actions" class="col-md-1" data-align="center" data-sortable="true">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td><a href="#">{{ entity.id }}</a></td>
+                            <td>{{ entity.username }}</td>
+                            <td>{{ entity.gecos }} </td>
+
+                            <td><a href="{{ path('gpu_user_edit', { 'id': entity.id}) }}"
+                                   class="btn btn-primary">Editar usuário</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_inline %}
+
+
+
+    <script type="text/javascript">
+        $("#listusers").DataTable({
+                    info: false,
+                    language: {
+                        url: '{{ asset('bundles/gpu/Portuguese-Brasil.json') }}'
+                    }
+                }
+        );
+
+    </script>
+{% endblock %}

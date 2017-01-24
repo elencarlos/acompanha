@@ -1,10 +1,13 @@
-user:
-    resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /
-
 app:
-    resource: "@AppBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+avanzu_admin:
+    resource: "@AvanzuAdminThemeBundle/Resources/config/routes.yml"
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /

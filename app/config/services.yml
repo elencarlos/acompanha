@@ -1,9 +1,22 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
+  app_admin_theme.navbar_user_listener.class: Avanzu\AdminThemeBundle\EventListener\NavbarShowUserDemoListener
+  app_admin_theme.setup_menu_listener.class: UFT\TemaBundle\EventListener\MenuListener
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app_admin_theme.navbar_user_listener:
+        class: "%app_admin_theme.navbar_user_listener.class%"
+        tags:
+          - {name: kernel.event_listener,event: theme.navbar_user,method: onShowUser}
+    app_bundle.setup_menu_listener:
+        class: "%app_admin_theme.setup_menu_listener.class%"
+        tags:
+          - { name: kernel.event_listener, event: theme.sidebar_setup_menu, method: onSetupMenu }
+    ldap_manager:
+      class: UFT\UserBundle\Util\LdapManager
+      arguments: ["%ldap_host%", "%ldap_username%", "%ldap_password%", "%ldap_basedn%"]
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }

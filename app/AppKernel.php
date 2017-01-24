@@ -13,17 +13,18 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new UFT\AppBundle\AppBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new UFT\UserBundle\UserBundle(),
             new FR3D\LdapBundle\FR3DLdapBundle(),
+            new UFT\UserBundle\UserBundle(),
+            new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(),
+            new UFT\TemaBundle\TemaBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
         );
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();

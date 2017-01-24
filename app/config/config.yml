@@ -2,10 +2,16 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@UserBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: pt_BR
 
 framework:
     #esi:             ~
-    translator:       ~
+    #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -13,9 +19,9 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -30,29 +36,14 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     globals:
-            src_logo: bundles/app/images/uft.png
-            src_logo_footer: bundles/app/images/uft.png
-            app_name: NomeAPP
-            app_subname: Sistema de Base
-            app_skin: skin-blue
-
-# Assetic Configuration
-assetic:
-    debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        ['AppBundle' ]
-    #java: /usr/bin/java
-    filters:
-        cssrewrite: ~
-        #closure:
-        #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
-        #yui_css:
-        #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
+          admin_skin: "%admin_skin%"
+    date:
+        timezone: America/Araguaina
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
+        driver:   pdo_mysql
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"
@@ -64,11 +55,25 @@ doctrine:
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
-        #     path:     "%database_path%"
+        #path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+#user
+fos_user:
+    db_driver: orm
+    firewall_name: main # nombre anterior
+    user_class: UFT\UserBundle\Entity\Usuario
+    from_email:
+        address:        naoresponder@dti.uft.edu.br
+        sender_name:    SLU/UFT - Sistema de Login Unificado
+
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -78,25 +83,19 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-#user
-fos_user:
-    db_driver: orm
-    firewall_name: main # nombre anterior
-    user_class: UFT\UserBundle\Entity\Usuario
-
-
 fr3d_ldap:
     driver:
-        host: jaca.uft.edu.br
-        username: uid=acesso,ou=People, o=uft,dc=edu,dc=br
-        password: wpSnlGNDSp
-        baseDn: o=uft,dc=edu,dc=br
+        host: "%ldap_host%"
+        username: "%ldap_username%"
+        password: "%ldap_password%"
+        baseDn: "%people_basedn%"
 #       port:                389    # Optional
 #       username:            foo    # Optional
 #       password:            bar    # Optional
         bindRequiresDn:      true   # Optional
 #       baseDn:              ou=users, dc=host, dc=foo   # Optional
-        accountFilterFormat: (&(uid=%s)(|(Professor=1)(Professor=2)(Funcionario=1)(Funcionario=4)(Funcionario=5)(Funcionario=6)(Funcionario=7)))
+        accountFilterFormat: '%ldap_filter%'
+#        accountFilterFormat: (&(uid=%s)(memberOf=cn=Teste2,ou=Group,o=uft,dc=edu,dc=br))
 #       optReferrals:        false  # Optional
 #       useSsl:              true   # Enable SSL negotiation. Optional
 #       useStartTls:         true   # Enable TLS negotiation. Optional
@@ -105,17 +104,15 @@ fr3d_ldap:
 #       accountDomainName: HOST
 #       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
     user:
-        baseDn: o=uft,dc=edu,dc=br
-#        filter: (| (!(professor=0)) (!(funcionario=0)) )
+        baseDn: "%ldap_basedn%"
+#        filter: '(memberOf=cn=Sistema - SLU,ou=Group,dc=uft,dc=edu,dc=br)'
         attributes:
             - { ldap_attr: uid,  user_method: setUsername }
             - { ldap_attr: mail, user_method: setEmail }
-            - { ldap_attr: idpessoa, user_method: setIdpessoa }
         # Specify ldap attributes mapping [ldap attribute, user object method]
 #           - { ldap_attr: uid,  user_method: setUsername } # Default
 #           - { ldap_attr: cn,   user_method: setName }     # Optional
 
 #           - { ldap_attr: ...,  user_method: ... }         # Optional
-#   service:
+    service:
 #       user_manager: fos_user.user_manager          # Overrides default user manager
-#       ldap_manager: fr3d_ldap.ldap_manager.default # Overrides default ldap manager

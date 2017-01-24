@@ -1,14 +1,22 @@
 # This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_driver: pdo_mysql
     database_host: 127.0.0.1
     database_port: null
     database_name: symfony
     database_user: root
-    database_password: 123456
+    database_password: null
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
-    locale: en
-    secret: 15e8d0183390f0d329d467eb6fd33020efe5072d
+    secret: dff10e3d9fecf660241600768a291275d31474cf
+
+    ldap_host: jaqueira.uft.edu.br
+    ldap_username: 'uid=acesso,ou=People, o=uft,dc=edu,dc=br'
+    ldap_password: wpSnlGNDSp
+    ldap_basedn: 'o=uft,dc=edu,dc=br'
+    ldap_filter: '(&(uid=%s))'
+    people_basedn: 'ou=People,dc=uft,dc=edu,dc=br'
+    admin_skin: skin-blue
