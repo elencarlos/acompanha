@@ -7,7 +7,7 @@ set('nomeProjeto','');
 set('repository', '');
 add('shared_files', []);
 add('shared_dirs', []);
-add('writable_dirs', []);
+add('writable_dirs', ['app/sessions']);
 
 // Servers
 server('homolog', 'pitangueira.uft.edu.br', 22)
