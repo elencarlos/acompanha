@@ -28,8 +28,23 @@ class Categoria
      */
     private $titulo;
 
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="departamentos")
+	 * @ORM\JoinTable(name="tarefa_categoria")
+	 */
+	private $tarefas;
 
-    /**
+	/**
+	 * Categoria constructor.
+	 */
+	public function __construct()
+	{
+		$this->tarefas = new ArrayCollection();
+	}
+
+
+	/**
      * Get id
      *
      * @return integer 

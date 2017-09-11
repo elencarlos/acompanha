@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UG
  *
- * @ORM\Table(name="u_g")
+ * @ORM\Table(name="ug")
  * @ORM\Entity(repositoryClass="UFT\PdiBundle\Repository\UGRepository")
  */
 class UG

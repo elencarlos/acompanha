@@ -2,6 +2,7 @@
 
 namespace UFT\PdiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,8 +29,31 @@ class Pessoa
      */
     private $nome;
 
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="pessoas")
+	 * @ORM\JoinTable(name="tarefa_pessoa")
+	 */
+	private $tarefas;
 
-    /**
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Cargo", inversedBy="pessoas")
+	 * @ORM\JoinTable(name="cargo_pessoa")
+	 */
+	private $cargos;
+
+	/**
+	 * Pessoa constructor.
+	 */
+	public function __construct()
+	{
+		$this->tarefas = new ArrayCollection();
+		$this->cargos = new ArrayCollection();
+	}
+
+
+	/**
      * Get id
      *
      * @return integer 

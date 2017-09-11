@@ -2,6 +2,7 @@
 
 namespace UFT\PdiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,8 +29,22 @@ class Cargo
      */
     private $nome;
 
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Pessoa", mappedBy="tarefas")
+	 */
+	private $pessoas;
 
-    /**
+	/**
+	 * Cargo constructor.
+	 */
+	public function __construct()
+	{
+		$this->pessoas = new ArrayCollection();
+	}
+
+
+	/**
      * Get id
      *
      * @return integer 

@@ -2,6 +2,7 @@
 
 namespace UFT\PdiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,8 +29,23 @@ class Departamento
      */
     private $nome;
 
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="departamentos")
+	 * @ORM\JoinTable(name="tarefa_departamento")
+	 */
+	private $tarefas;
 
-    /**
+	/**
+	 * Departamento constructor.
+	 */
+	public function __construct()
+	{
+		$this->tarefas = new ArrayCollection();
+	}
+
+
+	/**
      * Get id
      *
      * @return integer 

@@ -2,6 +2,7 @@
 
 namespace UFT\PdiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,143 +13,194 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Tarefa
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="solicitacao", type="text")
-     */
-    private $solicitacao;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="solicitacao", type="text")
+	 */
+	private $solicitacao;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="nivel", type="integer")
-     */
-    private $nivel;
+	/**
+	 * @var int
+	 *
+	 * @ORM\Column(name="nivel", type="integer")
+	 */
+	private $nivel;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="data_inicio", type="datetime", nullable=true)
-     */
-    private $dataInicio;
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="data_inicio", type="datetime", nullable=true)
+	 */
+	private $dataInicio;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="data_fim", type="datetime", nullable=true)
-     */
-    private $dataFim;
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="data_fim", type="datetime", nullable=true)
+	 */
+	private $dataFim;
+
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Pessoa", mappedBy="tarefas")
+	 */
+	private $pessoas;
+
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Departamento", mappedBy="tarefas")
+	 */
+	private $departamentos;
+
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Categoria", mappedBy="tarefas")
+	 */
+	private $categorias;
+
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Indicador", mappedBy="tarefas")
+	 */
+	private $indicadores;
+
+	/**
+	 * Tarefa constructor.
+	 */
+	public function __construct()
+	{
+		$this->pessoas = new ArrayCollection();
+		$this->departamentos = new ArrayCollection();
+		$this->categorias = new ArrayCollection();
+		$this->indicadores = new ArrayCollection();
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPessoas()
+	{
+		return $this->pessoas;
+	}
+
+	/**
+	 * @param mixed $pessoas
+	 */
+	public function setPessoas($pessoas)
+	{
+		$this->pessoas = $pessoas;
+	}
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id
+	 *
+	 * @return integer
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set solicitacao
-     *
-     * @param string $solicitacao
-     * @return Tarefa
-     */
-    public function setSolicitacao($solicitacao)
-    {
-        $this->solicitacao = $solicitacao;
+	/**
+	 * Get solicitacao
+	 *
+	 * @return string
+	 */
+	public function getSolicitacao()
+	{
+		return $this->solicitacao;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set solicitacao
+	 *
+	 * @param string $solicitacao
+	 * @return Tarefa
+	 */
+	public function setSolicitacao($solicitacao)
+	{
+		$this->solicitacao = $solicitacao;
 
-    /**
-     * Get solicitacao
-     *
-     * @return string 
-     */
-    public function getSolicitacao()
-    {
-        return $this->solicitacao;
-    }
+		return $this;
+	}
 
-    /**
-     * Set nivel
-     *
-     * @param integer $nivel
-     * @return Tarefa
-     */
-    public function setNivel($nivel)
-    {
-        $this->nivel = $nivel;
+	/**
+	 * Get nivel
+	 *
+	 * @return integer
+	 */
+	public function getNivel()
+	{
+		return $this->nivel;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set nivel
+	 *
+	 * @param integer $nivel
+	 * @return Tarefa
+	 */
+	public function setNivel($nivel)
+	{
+		$this->nivel = $nivel;
 
-    /**
-     * Get nivel
-     *
-     * @return integer 
-     */
-    public function getNivel()
-    {
-        return $this->nivel;
-    }
+		return $this;
+	}
 
-    /**
-     * Set dataInicio
-     *
-     * @param \DateTime $dataInicio
-     * @return Tarefa
-     */
-    public function setDataInicio($dataInicio)
-    {
-        $this->dataInicio = $dataInicio;
+	/**
+	 * Get dataInicio
+	 *
+	 * @return \DateTime
+	 */
+	public function getDataInicio()
+	{
+		return $this->dataInicio;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set dataInicio
+	 *
+	 * @param \DateTime $dataInicio
+	 * @return Tarefa
+	 */
+	public function setDataInicio($dataInicio)
+	{
+		$this->dataInicio = $dataInicio;
 
-    /**
-     * Get dataInicio
-     *
-     * @return \DateTime 
-     */
-    public function getDataInicio()
-    {
-        return $this->dataInicio;
-    }
+		return $this;
+	}
 
-    /**
-     * Set dataFim
-     *
-     * @param \DateTime $dataFim
-     * @return Tarefa
-     */
-    public function setDataFim($dataFim)
-    {
-        $this->dataFim = $dataFim;
+	/**
+	 * Get dataFim
+	 *
+	 * @return \DateTime
+	 */
+	public function getDataFim()
+	{
+		return $this->dataFim;
+	}
 
-        return $this;
-    }
+	/**
+	 * Set dataFim
+	 *
+	 * @param \DateTime $dataFim
+	 * @return Tarefa
+	 */
+	public function setDataFim($dataFim)
+	{
+		$this->dataFim = $dataFim;
 
-    /**
-     * Get dataFim
-     *
-     * @return \DateTime 
-     */
-    public function getDataFim()
-    {
-        return $this->dataFim;
-    }
+		return $this;
+	}
 }
