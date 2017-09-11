@@ -42,8 +42,15 @@ class Anexo
      */
     private $datahora;
 
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Tarefa", inversedBy="anexos")
+	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
+	 */
+	private $tarefa;
 
-    /**
+
+	/**
      * Get id
      *
      * @return integer 

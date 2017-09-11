@@ -75,6 +75,31 @@ class Tarefa
 	private $indicadores;
 
 	/**
+	 * Many Tarefas have One Tarefa.
+	 * @ORM\ManyToOne(targetEntity="Tarefa", inversedBy="filhos")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 */
+	private $pai;
+
+	/**
+	 * One Category has Many Categories.
+	 * @ORM\OneToMany(targetEntity="Tarefa", mappedBy="pai")
+	 */
+	private $filhos;
+
+	/**
+	 * One Product has Many Features.
+	 * @ORM\OneToMany(targetEntity="Equipamento", mappedBy="tarefas")
+	 */
+	private $equipamentos;
+
+	/**
+	 * One Product has Many Features.
+	 * @ORM\OneToMany(targetEntity="Anexo", mappedBy="tarefas")
+	 */
+	private $anexos;
+
+	/**
 	 * Tarefa constructor.
 	 */
 	public function __construct()
@@ -83,7 +108,10 @@ class Tarefa
 		$this->departamentos = new ArrayCollection();
 		$this->categorias = new ArrayCollection();
 		$this->indicadores = new ArrayCollection();
+		$this->equipamentos = new ArrayCollection();
 	}
+
+
 
 	/**
 	 * @return mixed

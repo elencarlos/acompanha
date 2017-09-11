@@ -35,6 +35,29 @@ class Equipamento
      */
     private $descricao;
 
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Tarefa", inversedBy="equipamentos")
+	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
+	 */
+	private $tarefa;
+
+	/**
+	 * @return mixed
+	 */
+	public function getTarefa()
+	{
+		return $this->tarefa;
+	}
+
+	/**
+	 * @param mixed $tarefa
+	 */
+	public function setTarefa($tarefa)
+	{
+		$this->tarefa = $tarefa;
+	}
+
 
     /**
      * Get id
