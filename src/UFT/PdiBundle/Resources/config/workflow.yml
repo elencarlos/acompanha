@@ -1,0 +1,28 @@
+workflow:
+    workflows:
+        tarefa:
+            type: 'workflow'
+            marking_store:
+                type: 'multiple_state' # or 'single_state'
+                arguments:
+                    - 'state'
+            supports:
+                - UFT\PdiBundle\Entity\Tarefa
+            places:
+                - aguardando_atendimento
+                - em_atendimento
+                - em_espera
+                - finalizado
+            transitions:
+                atender:
+                    from: aguardando_atendimento
+                    to: em_atendimento
+                colocar_em_espera:
+                    from: em_atendimento
+                    to: em_espera
+                retirar_da_espera:
+                    from: em_espera
+                    to: em_atendimento
+                finalizar:
+                    from: em_atendimento
+                    to: finalizado
