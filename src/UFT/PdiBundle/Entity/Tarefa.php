@@ -51,6 +51,13 @@ class Tarefa
 	private $dataFim;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="state", type="string", nullable=true)
+	 */
+	private $state;
+
+	/**
 	 * Many Groups have Many Users.
 	 * @ORM\ManyToMany(targetEntity="Pessoa", mappedBy="tarefas")
 	 */
@@ -231,4 +238,134 @@ class Tarefa
 
 		return $this;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getState()
+	{
+		return $this->state;
+	}
+
+	/**
+	 * @param string $state
+	 */
+	public function setState($state)
+	{
+		$this->state = $state;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getDepartamentos()
+	{
+		return $this->departamentos;
+	}
+
+	/**
+	 * @param mixed $departamentos
+	 */
+	public function setDepartamentos($departamentos)
+	{
+		$this->departamentos = $departamentos;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getCategorias()
+	{
+		return $this->categorias;
+	}
+
+	/**
+	 * @param mixed $categorias
+	 */
+	public function setCategorias($categorias)
+	{
+		$this->categorias = $categorias;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getIndicadores()
+	{
+		return $this->indicadores;
+	}
+
+	/**
+	 * @param mixed $indicadores
+	 */
+	public function setIndicadores($indicadores)
+	{
+		$this->indicadores = $indicadores;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPai()
+	{
+		return $this->pai;
+	}
+
+	/**
+	 * @param mixed $pai
+	 */
+	public function setPai($pai)
+	{
+		$this->pai = $pai;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getFilhos()
+	{
+		return $this->filhos;
+	}
+
+	/**
+	 * @param mixed $filhos
+	 */
+	public function setFilhos($filhos)
+	{
+		$this->filhos = $filhos;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getEquipamentos()
+	{
+		return $this->equipamentos;
+	}
+
+	/**
+	 * @param mixed $equipamentos
+	 */
+	public function setEquipamentos($equipamentos)
+	{
+		$this->equipamentos = $equipamentos;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getAnexos()
+	{
+		return $this->anexos;
+	}
+
+	/**
+	 * @param mixed $anexos
+	 */
+	public function setAnexos($anexos)
+	{
+		$this->anexos = $anexos;
+	}
+
+
 }
