@@ -12,7 +12,7 @@
         ]
     },
     "require": {
-        "php": ">=5.3.9",
+        "php": ">=5.5.9",
         "symfony/symfony": "2.8.*",
         "doctrine/orm": "^2.4.8",
         "doctrine/doctrine-bundle": "~1.4",
@@ -27,10 +27,11 @@
         "symfony/assetic-bundle": "^2.7",
         "twig/extensions": "^1.4",
         "sonata-project/admin-bundle": "^3.11",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.1"
+        "sonata-project/doctrine-orm-admin-bundle": "^3.1",
+        "fduch/workflow-bundle": "^2.0"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~3.0",
+        "sensio/generator-bundle": "^3.1",
         "symfony/phpunit-bridge": "~2.7"
     },
     "scripts": {
@@ -52,7 +53,7 @@
     "config": {
         "bin-dir": "bin",
         "platform": {
-            "php": "5.3.9"
+            "php": "5.5.9"
         }
     },
     "extra": {

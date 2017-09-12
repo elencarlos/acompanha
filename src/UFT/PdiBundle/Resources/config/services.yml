@@ -1,0 +1,4 @@
+services:
+#    pdi.example:
+#        class: UFT\PdiBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
