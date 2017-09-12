@@ -37,11 +37,25 @@ class Departamento
 	private $tarefas;
 
 	/**
+	 * Many Tarefas have One Tarefa.
+	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="filhos")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 */
+	private $pai;
+
+	/**
+	 * One Category has Many Tarefa.
+	 * @ORM\OneToMany(targetEntity="Departamento", mappedBy="pai")
+	 */
+	private $filhos;
+
+	/**
 	 * Departamento constructor.
 	 */
 	public function __construct()
 	{
 		$this->tarefas = new ArrayCollection();
+		$this->filhos = new ArrayCollection();
 	}
 
 

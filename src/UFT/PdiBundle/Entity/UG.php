@@ -28,6 +28,12 @@ class UG
      */
     private $nome;
 
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Checklist", inversedBy="ugs")
+	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
+	 */
+	private $pdi;
 
     /**
      * Get id

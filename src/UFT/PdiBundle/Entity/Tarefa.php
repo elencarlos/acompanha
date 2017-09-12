@@ -89,7 +89,7 @@ class Tarefa
 	private $pai;
 
 	/**
-	 * One Category has Many Categories.
+	 * One Category has Many Tarefa.
 	 * @ORM\OneToMany(targetEntity="Tarefa", mappedBy="pai")
 	 */
 	private $filhos;
@@ -107,6 +107,13 @@ class Tarefa
 	private $anexos;
 
 	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Checklist", inversedBy="tarefas")
+	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
+	 */
+	private $pdi;
+
+	/**
 	 * Tarefa constructor.
 	 */
 	public function __construct()
@@ -116,6 +123,8 @@ class Tarefa
 		$this->categorias = new ArrayCollection();
 		$this->indicadores = new ArrayCollection();
 		$this->equipamentos = new ArrayCollection();
+		$this->anexos = new ArrayCollection();
+		$this->anexos = new ArrayCollection();
 	}
 
 

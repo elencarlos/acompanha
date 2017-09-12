@@ -58,11 +58,25 @@ class Indicador
 	private $tarefas;
 
 	/**
+	 * One Category has Many Categories.
+	 * @ORM\OneToMany(targetEntity="Indicador", mappedBy="pai")
+	 */
+	private $filhos;
+
+	/**
+	 * Many Categories have One Category.
+	 * @ORM\ManyToOne(targetEntity="Indicador", inversedBy="filhos")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 */
+	private $pai;
+
+	/**
 	 * Indicador constructor.
 	 */
 	public function __construct()
 	{
 		$this->tarefas = new ArrayCollection();
+		$this->filhos = new ArrayCollection();
 	}
 
 

@@ -2,6 +2,7 @@
 
 namespace UFT\PdiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,8 +57,39 @@ class PDI
      */
     private $anoVigente;
 
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="pdi")
+	 * @ORM\JoinTable(name="pdi_tarefa")
+	 */
+	private $tarefas;
 
-    /**
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="UG", inversedBy="pdi")
+	 * @ORM\JoinTable(name="pdi_ug")
+	 */
+	private $ugs;
+
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Categoria", inversedBy="pdi")
+	 * @ORM\JoinTable(name="pdi_categoria")
+	 */
+	private $categorias;
+
+	/**
+	 * PDI constructor.
+	 */
+	public function __construct()
+	{
+		$this->tarefas = new ArrayCollection();
+		$this->ugs = new ArrayCollection();
+		$this->categorias = new ArrayCollection();
+	}
+
+
+	/**
      * Get id
      *
      * @return int

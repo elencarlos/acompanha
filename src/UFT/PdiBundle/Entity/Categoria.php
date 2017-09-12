@@ -36,11 +36,32 @@ class Categoria
 	private $tarefas;
 
 	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="PDI", inversedBy="categorias")
+	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
+	 */
+	private $pdi;
+
+	/**
+	 * One Category has Many Categories.
+	 * @ORM\OneToMany(targetEntity="Categoria", mappedBy="pai")
+	 */
+	private $filhos;
+
+	/**
+	 * Many Categories have One Category.
+	 * @ORM\ManyToOne(targetEntity="Categoria", inversedBy="filhos")
+	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 */
+	private $pai;
+
+	/**
 	 * Categoria constructor.
 	 */
 	public function __construct()
 	{
 		$this->tarefas = new ArrayCollection();
+		$this->filhos = new ArrayCollection();
 	}
 
 
