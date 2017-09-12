@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PDI
  *
- * @ORM\Table(name="p_d_i")
+ * @ORM\Table(name="pdi")
  * @ORM\Entity(repositoryClass="UFT\PdiBundle\Repository\PDIRepository")
  */
 class PDI
@@ -77,6 +77,12 @@ class PDI
 	 * @ORM\JoinTable(name="pdi_categoria")
 	 */
 	private $categorias;
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Indicador", inversedBy="pdi")
+	 * @ORM\JoinTable(name="pdi_indicador")
+	 */
+	private $indicadores;
 
 	/**
 	 * PDI constructor.

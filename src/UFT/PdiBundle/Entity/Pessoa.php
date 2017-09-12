@@ -32,16 +32,29 @@ class Pessoa
 	/**
 	 * Many Users have Many Groups.
 	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="pessoas")
-	 * @ORM\JoinTable(name="tarefa_pessoa")
+	 * @ORM\JoinTable(name="pessoa_tarefa")
 	 */
 	private $tarefas;
 
 	/**
 	 * Many Users have Many Groups.
 	 * @ORM\ManyToMany(targetEntity="Cargo", inversedBy="pessoas")
-	 * @ORM\JoinTable(name="cargo_pessoa")
+	 * @ORM\JoinTable(name="pessoa_cargo")
 	 */
 	private $cargos;
+
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Indicador", inversedBy="pessoas")
+	 * @ORM\JoinTable(name="pessoa_indicador")
+	 */
+	private $indicadores;
+
+	/**
+	 * One Product has Many Features.
+	 * @ORM\OneToMany(targetEntity="Indicador", mappedBy="responsavel")
+	 */
+	private $indicadoresResponsavel;
 
 	/**
 	 * Pessoa constructor.

@@ -39,7 +39,7 @@ class Departamento
 	/**
 	 * Many Tarefas have One Tarefa.
 	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="filhos")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
 	 */
 	private $pai;
 
@@ -48,6 +48,12 @@ class Departamento
 	 * @ORM\OneToMany(targetEntity="Departamento", mappedBy="pai")
 	 */
 	private $filhos;
+
+	/**
+	 * One Product has Many Features.
+	 * @ORM\OneToMany(targetEntity="UG", mappedBy="departamento")
+	 */
+	private $ugs;
 
 	/**
 	 * Departamento constructor.

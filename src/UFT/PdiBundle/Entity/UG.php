@@ -30,10 +30,17 @@ class UG
 
 	/**
 	 * Many Features have One Product.
-	 * @ORM\ManyToOne(targetEntity="Checklist", inversedBy="ugs")
+	 * @ORM\ManyToOne(targetEntity="PDI", inversedBy="ugs")
 	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
 	 */
 	private $pdi;
+
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="ugs")
+	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
+	 */
+	private $departamento;
 
     /**
      * Get id
