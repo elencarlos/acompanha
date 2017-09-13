@@ -1,6 +1,6 @@
 <?php
 
-namespace UFT\UserBundle\Util;
+namespace UFT\UserBundle\Util\Ldap;
 
 
 class LdapManager

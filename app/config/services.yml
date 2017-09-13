@@ -13,8 +13,8 @@ services:
         tags:
           - { name: kernel.event_listener, event: theme.sidebar_setup_menu, method: onSetupMenu }
     ldap_manager:
-      class: UFT\UserBundle\Util\LdapManager
-      arguments: ["%ldap_host%", "%ldap_username%", "%ldap_password%", "%ldap_basedn%"]
+        class: UFT\UserBundle\Util\Ldap\LdapManager
+        arguments: ["%ldap_host%", "%ldap_username%", "%ldap_password%", "%ldap_basedn%"]
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl

@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new UFT\PdiBundle\PdiBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\UserBundle\SonataUserBundle('UserBundle'),
 
 	        //Workflow
 	        new \Symfony\Bundle\WorkflowBundle\WorkflowBundle(),

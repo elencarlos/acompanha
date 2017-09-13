@@ -51,11 +51,25 @@ class Tarefa
 	private $dataFim;
 
 	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="data_ano", type="datetime", nullable=true)
+	 */
+	private $ano;
+
+	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="state", type="string", nullable=true)
+	 * @ORM\Column(name="state_tarefa", type="json_array", nullable=true)
 	 */
-	private $state;
+	private $stateTarefa;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="state_pdi", type="json_array", nullable=true)
+	 */
+	private $statePdi;
 
 	/**
 	 * Many Groups have Many Users.
@@ -74,6 +88,11 @@ class Tarefa
 	 * @ORM\ManyToMany(targetEntity="Categoria", mappedBy="tarefas")
 	 */
 	private $categorias;
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Checklist", mappedBy="tarefas")
+	 */
+	private $checklists;
 
 	/**
 	 * Many Groups have Many Users.
@@ -84,7 +103,7 @@ class Tarefa
 	/**
 	 * Many Tarefas have One Tarefa.
 	 * @ORM\ManyToOne(targetEntity="Tarefa", inversedBy="filhos")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
 	 */
 	private $pai;
 
@@ -108,7 +127,7 @@ class Tarefa
 
 	/**
 	 * Many Features have One Product.
-	 * @ORM\ManyToOne(targetEntity="Checklist", inversedBy="tarefas")
+	 * @ORM\ManyToOne(targetEntity="PDI", inversedBy="tarefas")
 	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
 	 */
 	private $pdi;
@@ -375,6 +394,87 @@ class Tarefa
 	{
 		$this->anexos = $anexos;
 	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getAno()
+	{
+		return $this->ano;
+	}
+
+	/**
+	 * @param \DateTime $ano
+	 */
+	public function setAno($ano)
+	{
+		$this->ano = $ano;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStateTarefa()
+	{
+		return $this->stateTarefa;
+	}
+
+	/**
+	 * @param string $stateTarefa
+	 */
+	public function setStateTarefa($stateTarefa)
+	{
+		$this->stateTarefa = $stateTarefa;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStatePdi()
+	{
+		return $this->statePdi;
+	}
+
+	/**
+	 * @param string $statePdi
+	 */
+	public function setStatePdi($statePdi)
+	{
+		$this->statePdi = $statePdi;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getChecklists()
+	{
+		return $this->checklists;
+	}
+
+	/**
+	 * @param mixed $checklists
+	 */
+	public function setChecklists($checklists)
+	{
+		$this->checklists = $checklists;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getPdi()
+	{
+		return $this->pdi;
+	}
+
+	/**
+	 * @param mixed $pdi
+	 */
+	public function setPdi($pdi)
+	{
+		$this->pdi = $pdi;
+	}
+
 
 
 }

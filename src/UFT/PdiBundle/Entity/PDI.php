@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PDI
  *
- * @ORM\Table(name="p_d_i")
+ * @ORM\Table(name="pdi")
  * @ORM\Entity(repositoryClass="UFT\PdiBundle\Repository\PDIRepository")
  */
 class PDI
@@ -37,23 +37,23 @@ class PDI
     private $descricao;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_inicio", type="datetime")
+     * @ORM\Column(name="ano_inicio", type="integer")
      */
     private $anoInicio;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_fim", type="datetime")
+     * @ORM\Column(name="ano_fim", type="integer")
      */
     private $anoFim;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_vigente", type="datetime")
+     * @ORM\Column(name="ano_vigente", type="integer")
      */
     private $anoVigente;
 
@@ -66,7 +66,7 @@ class PDI
 
 	/**
 	 * Many Users have Many Groups.
-	 * @ORM\ManyToMany(targetEntity="UG", inversedBy="pdi")
+	 * @ORM\ManyToMany(targetEntity="UG", inversedBy="pdis")
 	 * @ORM\JoinTable(name="pdi_ug")
 	 */
 	private $ugs;
@@ -77,6 +77,12 @@ class PDI
 	 * @ORM\JoinTable(name="pdi_categoria")
 	 */
 	private $categorias;
+	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Indicador", inversedBy="pdi")
+	 * @ORM\JoinTable(name="pdi_indicador")
+	 */
+	private $indicadores;
 
 	/**
 	 * PDI constructor.
@@ -218,5 +224,12 @@ class PDI
     {
         return $this->anoVigente;
     }
+
+	public function __toString()
+	{
+		return $this->titulo?$this->titulo. " (".$this->anoInicio."-".$this->anoFim.")":"Novo PDI";
+	}
+
+
 }
 

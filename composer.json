@@ -21,14 +21,16 @@
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
-        "fr3d/ldap-bundle": "~2.0.0",
+        "friendsofsymfony/user-bundle": "~1.3",
+        "fr3d/ldap-bundle": "^3.0",
         "avanzu/admin-theme-bundle": "~1.3",
         "symfony/assetic-bundle": "^2.7",
         "twig/extensions": "^1.4",
-        "sonata-project/admin-bundle": "^3.11",
+        "sonata-project/admin-bundle": "^3.23.0",
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
-        "fduch/workflow-bundle": "^2.0"
+        "fduch/workflow-bundle": "^2.0",
+        "sonata-project/user-bundle": "^3.2",
+        "sonata-project/easy-extends-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.1",
