@@ -44,29 +44,52 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #path:     "%database_path%"
+        default_connection: default
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        default_entity_manager:   default
+        #auto_mapping: true
+
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                connection:       default
+                mappings:
+                    AppBundle: ~
+                    UserBundle: ~
+                    FOSUserBundle: ~
+                    PdiBundle: ~
+                    SonataUserBundle: ~
+                dql:
+                    numeric_functions:
+                        rand:        Mapado\MysqlDoctrineFunctions\DQL\MysqlRand
+                        round:       Mapado\MysqlDoctrineFunctions\DQL\MysqlRound
+                    datetime_functions:
+                        date:        Mapado\MysqlDoctrineFunctions\DQL\MysqlDate
+                        date_format: Mapado\MysqlDoctrineFunctions\DQL\MysqlDateFormat
+
 #user
 fos_user:
     db_driver: orm
     firewall_name: main # nombre anterior
-    user_class: UFT\UserBundle\Entity\Usuario
+    user_class: UFT\UserBundle\Entity\User
+    group:
+        group_class:   UFT\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: uft_user.fos.user_manager
     from_email:
         address:        naoresponder@dti.uft.edu.br
         sender_name:    SLU/UFT - Sistema de Login Unificado
@@ -116,9 +139,29 @@ fr3d_ldap:
 
 #           - { ldap_attr: ...,  user_method: ... }         # Optional
     service:
+        user_hydrator: uft_user.ldap.user_hydrator
 #       user_manager: fos_user.user_manager          # Overrides default user manager
 
-# app/config/config.yml
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb
+    class:
+        user:       UFT\UserBundle\Entity\User
+        group:      UFT\UserBundle\Entity\Group
+    admin:                  # Admin Classes
+        user:
+            class:          UFT\UserBundle\Admin\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+
+        group:
+            class:          UFT\UserBundle\Admin\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+    impersonating:
+            route: sonata_admin_dashboard
+
+
 sonata_block:
     default_contexts: [cms]
     blocks:
@@ -126,6 +169,53 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts: [admin]
         # ...
+        # blocos do sonata user bundle
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
+        # ...
+
 sonata_admin:
+    title:      'PDI'
+    title_logo: /bundles/app/image/pdi.png
+    options:
+        use_select2: true
+        use_icheck: true
+
     templates:
         layout: '::base-sonata.html.twig'
+    security:
+        handler: sonata.admin.security.handler.acl
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            USER:     [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+    dashboard:
+            blocks:
+                -
+                    position: left
+                    type: sonata.admin.block.admin_list
+                    roles: [ROLE_SUPER_ADMIN]
+            groups:
+                usuarios:
+                    label: Gestão de Usuários
+                    icon:  '<i class="fa fa-users"></i>'
+                    items:
+                        - sonata.user.admin.group
+                        - sonata.user.admin.user
+                    roles: [ROLE_ADMIN]
+
+                admin:
+                    label: Admin
+                    icon:  '<i class="fa fa-cogs"></i>'
+                    roles: [ROLE_SUPER_ADMIN]
