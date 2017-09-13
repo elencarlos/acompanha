@@ -40,7 +40,8 @@ twig:
           admin_skin: "%admin_skin%"
     date:
         timezone: America/Araguaina
-
+    form_themes:
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -129,3 +130,4 @@ sonata_block:
 sonata_admin:
     templates:
         layout: '::base-sonata.html.twig'
+

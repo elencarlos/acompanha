@@ -37,23 +37,23 @@ class PDI
     private $descricao;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_inicio", type="datetime")
+     * @ORM\Column(name="ano_inicio", type="integer")
      */
     private $anoInicio;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_fim", type="datetime")
+     * @ORM\Column(name="ano_fim", type="integer")
      */
     private $anoFim;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="ano_vigente", type="datetime")
+     * @ORM\Column(name="ano_vigente", type="integer")
      */
     private $anoVigente;
 
@@ -224,5 +224,12 @@ class PDI
     {
         return $this->anoVigente;
     }
+
+	public function __toString()
+	{
+		return $this->titulo?$this->titulo. " (".$this->anoInicio."-".$this->anoFim.")":"Novo PDI";
+	}
+
+
 }
 
