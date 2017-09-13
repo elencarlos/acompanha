@@ -36,11 +36,19 @@ class Cargo
 	private $pessoas;
 
 	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Departamento", mappedBy="cargos")
+	 */
+	private $departamentos;
+
+
+	/**
 	 * Cargo constructor.
 	 */
 	public function __construct()
 	{
 		$this->pessoas = new ArrayCollection();
+		$this->departamentos = new ArrayCollection();
 	}
 
 

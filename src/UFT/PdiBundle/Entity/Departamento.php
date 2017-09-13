@@ -37,6 +37,13 @@ class Departamento
 	private $tarefas;
 
 	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Cargo", inversedBy="departamentos")
+	 * @ORM\JoinTable(name="cargo_departamento")
+	 */
+	private $cargos;
+
+	/**
 	 * Many Tarefas have One Tarefa.
 	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="filhos")
 	 * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")

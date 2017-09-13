@@ -36,9 +36,15 @@ class UG
 	private $pdi;
 
 	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="PDI", mappedBy="ugs")
+	 */
+	private $pdis;
+
+	/**
 	 * Many Features have One Product.
 	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="ugs")
-	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
 	 */
 	private $departamento;
 

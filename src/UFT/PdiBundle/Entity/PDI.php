@@ -66,7 +66,7 @@ class PDI
 
 	/**
 	 * Many Users have Many Groups.
-	 * @ORM\ManyToMany(targetEntity="UG", inversedBy="pdi")
+	 * @ORM\ManyToMany(targetEntity="UG", inversedBy="pdis")
 	 * @ORM\JoinTable(name="pdi_ug")
 	 */
 	private $ugs;
