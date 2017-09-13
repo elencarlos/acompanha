@@ -37,9 +37,16 @@ class Departamento
 	private $tarefas;
 
 	/**
+	 * Many Users have Many Groups.
+	 * @ORM\ManyToMany(targetEntity="Cargo", inversedBy="departamentos")
+	 * @ORM\JoinTable(name="cargo_departamento")
+	 */
+	private $cargos;
+
+	/**
 	 * Many Tarefas have One Tarefa.
 	 * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="filhos")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id")
 	 */
 	private $pai;
 
@@ -48,6 +55,12 @@ class Departamento
 	 * @ORM\OneToMany(targetEntity="Departamento", mappedBy="pai")
 	 */
 	private $filhos;
+
+	/**
+	 * One Product has Many Features.
+	 * @ORM\OneToMany(targetEntity="UG", mappedBy="departamento")
+	 */
+	private $ugs;
 
 	/**
 	 * Departamento constructor.

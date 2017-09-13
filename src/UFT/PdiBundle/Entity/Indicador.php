@@ -52,7 +52,7 @@ class Indicador
 
 	/**
 	 * Many Users have Many Groups.
-	 * @ORM\ManyToMany(targetEntity="Indicador", inversedBy="indicadores")
+	 * @ORM\ManyToMany(targetEntity="Tarefa", inversedBy="indicadores")
 	 * @ORM\JoinTable(name="tarefa_indicador")
 	 */
 	private $tarefas;
@@ -66,9 +66,29 @@ class Indicador
 	/**
 	 * Many Categories have One Category.
 	 * @ORM\ManyToOne(targetEntity="Indicador", inversedBy="filhos")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="indicador_id", referencedColumnName="id")
 	 */
 	private $pai;
+
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Pessoa", inversedBy="indicadoresResponsavel")
+	 * @ORM\JoinColumn(name="pessoa_id", referencedColumnName="id")
+	 */
+	private $responsavel;
+
+	/**
+	 * Many Groups have Many Users.
+	 * @ORM\ManyToMany(targetEntity="Pessoa", mappedBy="indicadores")
+	 */
+	private $pessoas;
+
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="PDI", inversedBy="indicadores")
+	 * @ORM\JoinColumn(name="pdi_id", referencedColumnName="id")
+	 */
+	private $pdi;
 
 	/**
 	 * Indicador constructor.

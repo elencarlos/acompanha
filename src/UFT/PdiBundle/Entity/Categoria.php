@@ -51,7 +51,7 @@ class Categoria
 	/**
 	 * Many Categories have One Category.
 	 * @ORM\ManyToOne(targetEntity="Categoria", inversedBy="filhos")
-	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="categoria_id", referencedColumnName="id")
 	 */
 	private $pai;
 

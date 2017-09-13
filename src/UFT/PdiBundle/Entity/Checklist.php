@@ -63,8 +63,14 @@ class Checklist
      */
     private $ativo;
 
+	/**
+	 * Many Features have One Product.
+	 * @ORM\ManyToOne(targetEntity="Tarefa", inversedBy="checklists")
+	 * @ORM\JoinColumn(name="tarefa_id", referencedColumnName="id")
+	 */
+	private $tarefa;
 
-    /**
+	/**
      * Get id
      *
      * @return integer 
@@ -211,4 +217,22 @@ class Checklist
     {
         return $this->ativo;
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getTarefa()
+	{
+		return $this->tarefa;
+	}
+
+	/**
+	 * @param mixed $tarefa
+	 */
+	public function setTarefa($tarefa)
+	{
+		$this->tarefa = $tarefa;
+	}
+
+
 }
