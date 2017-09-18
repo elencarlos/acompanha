@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Setores;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -18,7 +19,8 @@ class ProcedimentoAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('nome')
-            ->add('tempoEstimado')
+            ->add('paciente.nome')
+//            ->add('setor.nome')
         ;
     }
 
@@ -29,16 +31,22 @@ class ProcedimentoAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('nome')
+            ->add('nome','string',array('label'=>'Procedimento'))
             ->add('tempoEstimado')
+            ->addIdentifier('paciente.nome','string', ['label' => 'Nome do Paciente'])
+            ->add('setor', 'choice', array(
+                    'editable' => true,
+                    'choices'  => Setores::getChoices(),
+                    'label' => 'Nome do Setor'
+                )
+            )
             ->add('_action', null, array(
+                'label' =>'Ações',
                 'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
+                    'edit'   => array(),
                     'delete' => array(),
                 ),
-            ))
-        ;
+            ));
     }
 
     /**
@@ -50,14 +58,12 @@ class ProcedimentoAdmin extends AbstractAdmin
             ->add('nome')
             ->add('tempoEstimado')
             ->add('paciente', 'sonata_type_model', array(
-                'class' => 'AppBundle:Paciente',
+                'class'    => 'AppBundle:Paciente',
                 'property' => 'nome'
             ))
-            ->add('setor', 'sonata_type_model', array(
-                'class' => 'AppBundle:Setor',
-                'property' => 'nome'
-            ))
-        ;
+            ->add('setor', 'choice', array(
+                'choices' => Setores::getChoices()
+            ));
     }
 
     /**
@@ -69,6 +75,7 @@ class ProcedimentoAdmin extends AbstractAdmin
             ->add('id')
             ->add('nome')
             ->add('tempoEstimado')
-        ;
+            ->add('paciente.nome')
+            ->add('setor.nome');
     }
 }

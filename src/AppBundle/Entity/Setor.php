@@ -39,6 +39,15 @@ class Setor
         return $this->id;
     }
 
+    /**
+     * Get nome
+     *
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
 
     /**
      * Set nome
@@ -52,15 +61,5 @@ class Setor
         $this->nome = $nome;
 
         return $this;
-    }
-
-    /**
-     * Get nome
-     *
-     * @return string
-     */
-    public function getNome()
-    {
-        return $this->nome;
     }
 }

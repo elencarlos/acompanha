@@ -42,8 +42,9 @@ class Procedimento
     private $paciente;
 
     /**
-     * @ORM\OneToOne(targetEntity="Setor")
-     * @ORM\JoinColumn(name="setor_id", referencedColumnName="id")
+     * ORM\OneToOne(targetEntity="Setor")
+     * ORM\JoinColumn(name="setor_id", referencedColumnName="id")
+     * @ORM\Column(name="setor", type="integer", nullable=true)
      */
     private $setor;
 
@@ -137,7 +138,7 @@ class Procedimento
      *
      * @return Procedimento
      */
-    public function setSetor(\AppBundle\Entity\Setor $setor = null)
+    public function setSetor($setor = null)
     {
         $this->setor = $setor;
 
