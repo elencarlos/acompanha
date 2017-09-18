@@ -4,7 +4,7 @@
 parameters:
     database_host: jlg7sfncbhyvga14.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
     database_port: 3306
-    database_name: acompanha
+    database_name: rjnrnw11ls4ncsf2
     database_user: olmd36wne5t6hi8i
     database_password: ylq4r76vs2tq869j
     mailer_transport: smtp
