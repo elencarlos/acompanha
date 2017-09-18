@@ -2,7 +2,11 @@
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
 parameters:
-    database_path: %kernel.root_dir%/sqlite.db.cache
+    database_host: jlg7sfncbhyvga14.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+    database_port: 3306
+    database_name: acompanha
+    database_user: olmd36wne5t6hi8i
+    database_password: ylq4r76vs2tq869j
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
