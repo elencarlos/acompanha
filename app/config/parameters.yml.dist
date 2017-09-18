@@ -8,3 +8,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: dff10e3d9fecf660241600768a291275d31474cf
+    admin_skin: skin-blue
