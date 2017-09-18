@@ -42,9 +42,9 @@ class Procedimento
     private $paciente;
 
     /**
-     * ORM\OneToOne(targetEntity="Setor")
-     * ORM\JoinColumn(name="setor_id", referencedColumnName="id")
-     * @ORM\Column(name="setor", type="integer", nullable=true)
+     * @ORM\OneToOne(targetEntity="Setor")
+     * @ORM\JoinColumn(name="setor_id", referencedColumnName="id")
+     * ORM\Column(name="setor", type="integer", nullable=true)
      */
     private $setor;
 

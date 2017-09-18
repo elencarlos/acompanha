@@ -29,6 +29,12 @@ class ProcedimentoAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $set = $this->modelManager->findBy('AppBundle:Setor');
+        $setores = [];
+        foreach ($set as  $s){
+            $setores[$s->getId()] = $s->getNome();
+        }
+
         $listMapper
             ->add('id')
             ->add('nome','string',array('label'=>'Procedimento'))
@@ -36,7 +42,9 @@ class ProcedimentoAdmin extends AbstractAdmin
             ->addIdentifier('paciente.nome','string', ['label' => 'Nome do Paciente'])
             ->add('setor', 'choice', array(
                     'editable' => true,
-                    'choices'  => Setores::getChoices(),
+                    'class' => 'AppBundle:Setor',
+                    'choices'  => $setores,
+                    'associated_property'=>'nome',
                     'label' => 'Nome do Setor'
                 )
             )
@@ -61,8 +69,9 @@ class ProcedimentoAdmin extends AbstractAdmin
                 'class'    => 'AppBundle:Paciente',
                 'property' => 'nome'
             ))
-            ->add('setor', 'choice', array(
-                'choices' => Setores::getChoices()
+            ->add('setor', 'sonata_type_model', array(
+                'class'    => 'AppBundle:Setor',
+                'property' => 'nome'
             ));
     }
 
