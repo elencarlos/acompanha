@@ -1,5 +1,5 @@
 {
-    "name": "flavio/novoapp",
+    "name": "gerosys/acompanha",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -22,7 +22,6 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~1.3",
-        "fr3d/ldap-bundle": "^3.0",
         "avanzu/admin-theme-bundle": "~1.3",
         "symfony/assetic-bundle": "^2.7",
         "twig/extensions": "^1.4",
@@ -30,7 +29,10 @@
         "sonata-project/doctrine-orm-admin-bundle": "^3.1",
         "fduch/workflow-bundle": "^2.0",
         "sonata-project/user-bundle": "^3.2",
-        "sonata-project/easy-extends-bundle": "^2.2"
+        "sonata-project/easy-extends-bundle": "^2.2",
+        "friendsofsymfony/rest-bundle": "^2.2",
+        "nelmio/api-doc-bundle": "^2.13",
+        "sonata-project/google-authenticator": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.1",

@@ -1,6 +1,8 @@
 security:
     encoders:
-        UFT\UserBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: sha512
+    acl:
+        connection: default
 
     erase_credentials: false
 
@@ -8,17 +10,11 @@ security:
         ROLE_USER:        [ROLE_SONATA_ADMIN]
         ROLE_ADMIN:       [ROLE_USER]
         ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT  # if you are using acl then this line must be commented
     providers:
-        chain_provider:
-           chain:
-             providers: [fos_userbundle, fr3d_ldapbundle]
         fos_userbundle:
-           id: fos_user.user_manager
-        fr3d_ldapbundle:
-           id: fr3d_ldap.security.user.provider
-    acl:
-        connection: default
+           id: fos_user.user_provider.username
 
     firewalls:
         # Disabling the security for the web debug toolbar, the profiler and Assetic.
@@ -28,21 +24,32 @@ security:
 
         # -> custom firewall for the admin area of the URL
         admin:
-            pattern:            /(.*)
+            pattern:            /admin(.*)
             context:            user
-            fr3d_ldap:  ~
             form_login:
                 provider:       fos_userbundle
                 login_path:     /admin/login
                 use_forward:    false
                 check_path:     /admin/login_check
                 failure_path:   null
-                default_target_path: sonata_admin_dashboard
+                default_target_path: /admin/dashboard
             logout:
                 path:           /admin/logout
                 target:         /admin/login
             anonymous:          true
             switch_user: true
+
+        main:
+            pattern:             .*
+            context:             user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   null
+            logout:             true
+            anonymous:          true
 
         # -> end custom configuration
 
@@ -61,6 +68,6 @@ security:
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
-        #- { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+#        - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
         - { path: ^/admin/, role: [ROLE_USER] }
-        - { path: ^/, role: [ROLE_USER] }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

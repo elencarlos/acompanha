@@ -17,8 +17,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new FR3D\LdapBundle\FR3DLdapBundle(),
-            new UFT\UserBundle\UserBundle(),
             new Avanzu\AdminThemeBundle\AvanzuAdminThemeBundle(),
             new UFT\TemaBundle\TemaBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
@@ -30,12 +28,9 @@ class AppKernel extends Kernel
             // And finally, the storage and SonataAdminBundle
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new UFT\PdiBundle\PdiBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
-            new Sonata\UserBundle\SonataUserBundle('UserBundle'),
-
-	        //Workflow
-	        new \Symfony\Bundle\WorkflowBundle\WorkflowBundle(),
+            new Sonata\UserBundle\SonataUserBundle(),
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

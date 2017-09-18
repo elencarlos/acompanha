@@ -2,8 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@UserBundle/Resources/config/services.yml" }
-    - { resource: "@PdiBundle/Resources/config/workflow.yml" }
+    - { resource: @AppBundle/Resources/config/services.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -50,12 +49,10 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
         connections:
             default:
-                driver:   pdo_mysql
-                host:     "%database_host%"
-                port:     "%database_port%"
-                dbname:   "%database_name%"
-                user:     "%database_user%"
-                password: "%database_password%"
+                driver: pdo_sqlite
+                user: acompanha
+                path:   "%database_path%"
+                memory: false
                 charset:  UTF8
 
     orm:
@@ -68,32 +65,10 @@ doctrine:
                 naming_strategy: doctrine.orm.naming_strategy.underscore
                 connection:       default
                 mappings:
-                    AppBundle: ~
-                    UserBundle: ~
-                    FOSUserBundle: ~
-                    PdiBundle: ~
+                    ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
-                dql:
-                    numeric_functions:
-                        rand:        Mapado\MysqlDoctrineFunctions\DQL\MysqlRand
-                        round:       Mapado\MysqlDoctrineFunctions\DQL\MysqlRound
-                    datetime_functions:
-                        date:        Mapado\MysqlDoctrineFunctions\DQL\MysqlDate
-                        date_format: Mapado\MysqlDoctrineFunctions\DQL\MysqlDateFormat
-
-#user
-fos_user:
-    db_driver: orm
-    firewall_name: main # nombre anterior
-    user_class: UFT\UserBundle\Entity\User
-    group:
-        group_class:   UFT\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager
-    service:
-        user_manager: uft_user.fos.user_manager
-    from_email:
-        address:        naoresponder@dti.uft.edu.br
-        sender_name:    SLU/UFT - Sistema de Login Unificado
+                    FOSUserBundle: ~
+                    AppBundle: ~
 
 services:
     fos_user.doctrine_registry:
@@ -108,60 +83,9 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-fr3d_ldap:
-    driver:
-        host: "%ldap_host%"
-        username: "%ldap_username%"
-        password: "%ldap_password%"
-        baseDn: "%people_basedn%"
-#       port:                389    # Optional
-#       username:            foo    # Optional
-#       password:            bar    # Optional
-        bindRequiresDn:      true   # Optional
-#       baseDn:              ou=users, dc=host, dc=foo   # Optional
-        accountFilterFormat: '%ldap_filter%'
-#        accountFilterFormat: (&(uid=%s)(memberOf=cn=Teste2,ou=Group,o=uft,dc=edu,dc=br))
-#       optReferrals:        false  # Optional
-#       useSsl:              true   # Enable SSL negotiation. Optional
-#       useStartTls:         true   # Enable TLS negotiation. Optional
-#        accountCanonicalForm: 2
-       # ACCTNAME_FORM_BACKSLASH this is only needed if your users have to login with something like HOST\User
-#       accountDomainName: HOST
-#       accountDomainNameShort: HOST # if you use the Backslash form set both to Hostname than the Username will be converted to HOST\User
-    user:
-        baseDn: "%ldap_basedn%"
-#        filter: '(memberOf=cn=Sistema - SLU,ou=Group,dc=uft,dc=edu,dc=br)'
-        attributes:
-            - { ldap_attr: uid,  user_method: setUsername }
-            - { ldap_attr: mail, user_method: setEmail }
-        # Specify ldap attributes mapping [ldap attribute, user object method]
-#           - { ldap_attr: uid,  user_method: setUsername } # Default
-#           - { ldap_attr: cn,   user_method: setName }     # Optional
-
-#           - { ldap_attr: ...,  user_method: ... }         # Optional
-    service:
-        user_hydrator: uft_user.ldap.user_hydrator
-#       user_manager: fos_user.user_manager          # Overrides default user manager
-
 sonata_user:
     security_acl: true
     manager_type: orm # can be orm or mongodb
-    class:
-        user:       UFT\UserBundle\Entity\User
-        group:      UFT\UserBundle\Entity\Group
-    admin:                  # Admin Classes
-        user:
-            class:          UFT\UserBundle\Admin\UserAdmin
-            controller:     SonataAdminBundle:CRUD
-            translation:    SonataUserBundle
-
-        group:
-            class:          UFT\UserBundle\Admin\GroupAdmin
-            controller:     SonataAdminBundle:CRUD
-            translation:    SonataUserBundle
-    impersonating:
-            route: sonata_admin_dashboard
-
 
 sonata_block:
     default_contexts: [cms]
@@ -176,8 +100,25 @@ sonata_block:
         sonata.block.service.text: # used to if you plan to use Sonata user routes
         # ...
 
+fos_user:
+    db_driver:      orm # can be orm or odm
+    firewall_name:  main
+    user_class:     Application\Sonata\UserBundle\Entity\User
+
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager                      # If you're using doctrine orm (use sonata.user.mongodb.user_manager for mongodb)
+
+doctrine:
+    dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
 sonata_admin:
-    title:      'PDI'
+    title:      'Acompanha'
     title_logo: /bundles/app/image/pdi.png
     options:
         use_select2: true

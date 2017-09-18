@@ -1,0 +1,21 @@
+services:
+    app.admin.procedimento:
+        class: AppBundle\Admin\ProcedimentoAdmin
+        arguments: [~, AppBundle\Entity\Procedimento, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Procedimento }
+        public: true
+
+    app.admin.paciente:
+        class: AppBundle\Admin\PacienteAdmin
+        arguments: [~, AppBundle\Entity\Paciente, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Paciente }
+        public: true
+
+    app.admin.setor:
+        class: AppBundle\Admin\SetorAdmin
+        arguments: [~, AppBundle\Entity\Setor, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Setor }
+        public: true
