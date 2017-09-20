@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="pt-BR" datatype="plaintext" original="">
+        <body>
+            <trans-unit id="pdi.admin">
+                <source>admin</source>
+                <target>Administração</target>
+            </trans-unit>
+            <trans-unit id="pdi.pdi">
+                <source>PDI</source>
+                <target>PDI</target>
+            </trans-unit>
+            <trans-unit id="pdi.PDI_list">
+                <source>PDI_list</source>
+                <target>Listagem PDI</target>
+            </trans-unit>
+            <trans-unit id="pdi.titulo">
+                <source>titulo</source>
+                <target>Título</target>
+            </trans-unit>
+            <trans-unit id="pdi.descricao">
+                <source>descricao</source>
+                <target>Descição</target>
+            </trans-unit>
+            <trans-unit id="pdi.anoInicio">
+                <source>anoInicio</source>
+                <target>Ano Inicial</target>
+            </trans-unit>
+            <trans-unit id="pdi.anoFim">
+                <source>anoFim</source>
+                <target>Ano Final</target>
+            </trans-unit>
+            <trans-unit id="pdi.anoVigente">
+                <source>anoVigente</source>
+                <target>Ano Vigente</target>
+            </trans-unit>
+            <trans-unit id="pdi.label.is_valid">
+                <source>label.is_valid</source>
+                <target>É Válido?</target>
+            </trans-unit>
+            <trans-unit id="pdi._action">
+                <source>_action</source>
+                <target>Ações</target>
+            </trans-unit>
+            <trans-unit id="pdi.id">
+                <source>id</source>
+                <target>Id</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
