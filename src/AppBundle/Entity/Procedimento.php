@@ -36,14 +36,14 @@ class Procedimento
     private $tempoEstimado;
 
     /**
-     * @ORM\OneToOne(targetEntity="Paciente")
-     * @ORM\JoinColumn(name="paciente_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Paciente")
+     * ORM\JoinColumn(name="paciente_id", referencedColumnName="id")
      */
     private $paciente;
 
     /**
-     * @ORM\OneToOne(targetEntity="Setor")
-     * @ORM\JoinColumn(name="setor_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Setor")
+     * ORM\JoinColumn(name="setor_id", referencedColumnName="id")
      * ORM\Column(name="setor", type="integer", nullable=true)
      */
     private $setor;

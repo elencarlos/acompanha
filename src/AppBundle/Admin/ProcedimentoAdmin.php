@@ -9,8 +9,11 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
+
 class ProcedimentoAdmin extends AbstractAdmin
 {
+
+    protected $translationDomain = 'AppBundle';
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -32,19 +35,19 @@ class ProcedimentoAdmin extends AbstractAdmin
         $set = $this->modelManager->findBy('AppBundle:Setor');
         $setores = [];
         foreach ($set as  $s){
-            $setores[$s->getId()] = $s->getNome();
+            $setores[$s->getId()] = $s->getName();
         }
 
         $listMapper
             ->add('id')
-            ->add('nome','string',array('label'=>'Procedimento'))
+            ->add('nome','text',array('label'=>'Descrição Procedimento(Observações)'))
             ->add('tempoEstimado')
             ->addIdentifier('paciente.nome','string', ['label' => 'Nome do Paciente'])
             ->add('setor', 'choice', array(
                     'editable' => true,
                     'class' => 'AppBundle:Setor',
                     'choices'  => $setores,
-                    'associated_property'=>'nome',
+                    'associated_property'=>'name',
                     'label' => 'Nome do Setor'
                 )
             )
@@ -63,7 +66,7 @@ class ProcedimentoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nome')
+            ->add('nome','text',['label'=>'Descrição Procedimento(Observações)'])
             ->add('tempoEstimado')
             ->add('paciente', 'sonata_type_model', array(
                 'class'    => 'AppBundle:Paciente',
@@ -71,7 +74,7 @@ class ProcedimentoAdmin extends AbstractAdmin
             ))
             ->add('setor', 'sonata_type_model', array(
                 'class'    => 'AppBundle:Setor',
-                'property' => 'nome'
+                'property' => 'name'
             ));
     }
 
@@ -85,6 +88,6 @@ class ProcedimentoAdmin extends AbstractAdmin
             ->add('nome')
             ->add('tempoEstimado')
             ->add('paciente.nome')
-            ->add('setor.nome');
+            ->add('setor.name');
     }
 }

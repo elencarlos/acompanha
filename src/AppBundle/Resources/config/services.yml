@@ -3,19 +3,19 @@ services:
         class: AppBundle\Admin\ProcedimentoAdmin
         arguments: [~, AppBundle\Entity\Procedimento, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Procedimento }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Cadastro de Paciente, label_catalogue: AppBundle }
         public: true
 
     app.admin.paciente:
         class: AppBundle\Admin\PacienteAdmin
         arguments: [~, AppBundle\Entity\Paciente, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Paciente }
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Pessoa }
         public: true
 
     app.admin.setor:
         class: AppBundle\Admin\SetorAdmin
         arguments: [~, AppBundle\Entity\Setor, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Setor }
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Setor }
         public: true

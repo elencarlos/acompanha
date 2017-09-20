@@ -49,12 +49,14 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
         connections:
             default:
-                driver:     pdo_mysql
-                host:       '%database_host%'
-                port:       '%database_port%'
-                dbname:     '%database_name%'
-                user:       '%database_user%'
-                password:   '%database_password%'
+                driver: pdo_sqlite
+                path: '%database_path%'
+#                driver:     pdo_mysql
+#                host:       '%database_host%'
+#                port:       '%database_port%'
+#                dbname:     '%database_name%'
+#                user:       '%database_user%'
+#                password:   '%database_password%'
                 charset:    UTF8
 
     orm:
@@ -148,19 +150,11 @@ sonata_admin:
     dashboard:
             blocks:
                 -
-                    position: left
+                    position: top
                     type: sonata.admin.block.admin_list
-                    roles: [ROLE_SUPER_ADMIN]
-            groups:
-                usuarios:
-                    label: Gestão de Usuários
-                    icon:  '<i class="fa fa-users"></i>'
-                    items:
-                        - sonata.user.admin.group
-                        - sonata.user.admin.user
                     roles: [ROLE_ADMIN]
-
+            groups:
                 admin:
-                    label: Admin
+                    label: Cadastro
                     icon:  '<i class="fa fa-cogs"></i>'
-                    roles: [ROLE_SUPER_ADMIN]
+                    roles: [ROLE_ADMIN]
