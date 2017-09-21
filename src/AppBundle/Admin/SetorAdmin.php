@@ -17,7 +17,7 @@ class SetorAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('name')
+            ->add('nome')
         ;
     }
 
@@ -28,7 +28,7 @@ class SetorAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('id')
-            ->add('name')
+            ->add('nome')
             ->add('_action', null, array(
                 'actions' => array(
                     'show' => array(),
@@ -45,7 +45,7 @@ class SetorAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
+            ->add('nome')
         ;
     }
 
@@ -56,7 +56,7 @@ class SetorAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('name')
+            ->add('nome')
         ;
     }
 }

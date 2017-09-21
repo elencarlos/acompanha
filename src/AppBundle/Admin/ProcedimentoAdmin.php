@@ -2,18 +2,19 @@
 
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Setores;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class ProcedimentoAdmin extends AbstractAdmin
 {
 
     protected $translationDomain = 'AppBundle';
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -21,10 +22,7 @@ class ProcedimentoAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
-            ->add('nome')
-            ->add('paciente.nome')
-//            ->add('setor.nome')
-        ;
+            ->add('paciente');
     }
 
     /**
@@ -32,27 +30,28 @@ class ProcedimentoAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        $set = $this->modelManager->findBy('AppBundle:Setor');
+        $set     = $this->modelManager->findBy('AppBundle:Setor');
         $setores = [];
-        foreach ($set as  $s){
-            $setores[$s->getId()] = $s->getName();
+        foreach ($set as $s) {
+            $setores[$s->getId()] = $s->getNome();
         }
 
         $listMapper
-            ->add('id')
-            ->add('nome','text',array('label'=>'Descrição Procedimento(Observações)'))
-            ->add('tempoEstimado')
-            ->addIdentifier('paciente.nome','string', ['label' => 'Nome do Paciente'])
+//            ->add('id')
+
+            ->addIdentifier('paciente', 'string', ['label' => 'Nome do Paciente'])
             ->add('setor', 'choice', array(
-                    'editable' => true,
-                    'class' => 'AppBundle:Setor',
-                    'choices'  => $setores,
-                    'associated_property'=>'name',
-                    'label' => 'Nome do Setor'
+                    'editable'            => true,
+                    'class'               => 'AppBundle:Setor',
+                    'choices'             => $setores,
+                    'associated_property' => 'name',
+                    'label'               => 'Nome do Setor'
                 )
             )
+//            ->add('nome', 'text', array('label' => 'Descrição Procedimento(Observações)'))
+//            ->add('tempoEstimado')
             ->add('_action', null, array(
-                'label' =>'Ações',
+                'label'   => 'Ações',
                 'actions' => array(
                     'edit'   => array(),
                     'delete' => array(),
@@ -66,16 +65,14 @@ class ProcedimentoAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('nome','text',['label'=>'Descrição Procedimento(Observações)'])
-            ->add('tempoEstimado')
-            ->add('paciente', 'sonata_type_model', array(
-                'class'    => 'AppBundle:Paciente',
-                'property' => 'nome'
-            ))
-            ->add('setor', 'sonata_type_model', array(
+            ->add('paciente', 'text', ['label' => 'Nome do Paciente','required' => false])
+            ->add('setor', EntityType::class, array(
                 'class'    => 'AppBundle:Setor',
-                'property' => 'name'
-            ));
+                'property' => 'nome',
+                'required' => false
+            ))
+            ->add('tempoEstimado','text',['required' => false])
+            ->add('nome', 'text', ['label' => 'Descrição Procedimento(Observações)','required' => false]);
     }
 
     /**

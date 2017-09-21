@@ -36,8 +36,9 @@ class Procedimento
     private $tempoEstimado;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Paciente")
+     * ORM\ManyToOne(targetEntity="Paciente")
      * ORM\JoinColumn(name="paciente_id", referencedColumnName="id")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $paciente;
 
@@ -108,28 +109,22 @@ class Procedimento
     }
 
     /**
-     * Set paciente
-     *
-     * @param \AppBundle\Entity\Paciente $paciente
-     *
-     * @return Procedimento
-     */
-    public function setPaciente(\AppBundle\Entity\Paciente $paciente = null)
-    {
-        $this->paciente = $paciente;
-
-        return $this;
-    }
-
-    /**
-     * Get paciente
-     *
-     * @return \AppBundle\Entity\Paciente
+     * @return mixed
      */
     public function getPaciente()
     {
         return $this->paciente;
     }
+
+    /**
+     * @param mixed $paciente
+     */
+    public function setPaciente($paciente)
+    {
+        $this->paciente = $paciente;
+    }
+
+
 
     /**
      * Set setor

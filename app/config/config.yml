@@ -130,6 +130,7 @@ sonata_admin:
 
     templates:
         layout: '::base-sonata.html.twig'
+        list: ::list.html.twig
 
     security:
         handler: sonata.admin.security.handler.acl
@@ -150,7 +151,7 @@ sonata_admin:
     dashboard:
             blocks:
                 -
-                    position: top
+                    position: center
                     type: sonata.admin.block.admin_list
                     roles: [ROLE_ADMIN]
             groups:

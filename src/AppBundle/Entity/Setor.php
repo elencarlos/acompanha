@@ -24,9 +24,9 @@ class Setor
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="nome", type="string", length=255)
      */
-    private $name;
+    private $nome;
 
 
     /**
@@ -42,27 +42,21 @@ class Setor
     /**
      * @return string
      */
-    public function getName()
+    public function getNome()
     {
-        return $this->name;
+        return $this->nome;
     }
 
     /**
-     * @param string $name
+     * @param string $nome
      */
-    public function setName($name)
+    public function setNome($nome)
     {
-        $this->name = $name;
+        $this->nome = $nome;
     }
 
-    public function getTitle(){
-        return $this->name;
-    }
-
-    function __toString()
+    public function __toString()
     {
-        return $this->name;
+        return $this->nome;
     }
-
-
 }

@@ -28,8 +28,6 @@ class Paciente
      */
     private $nome;
 
-
-
     /**
      * Get id
      *

@@ -6,6 +6,10 @@
                 <source>Procedimento List</source>
                 <target>Lista de Pacientes</target>
             </trans-unit>
+            <trans-unit id="Procedimento Create">
+                <source>Procedimento Create</source>
+                <target>Cadastro de Paciente</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
