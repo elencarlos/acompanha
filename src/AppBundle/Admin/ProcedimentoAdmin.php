@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
@@ -14,6 +15,7 @@ class ProcedimentoAdmin extends AbstractAdmin
 {
 
     protected $translationDomain = 'AppBundle';
+    protected $baseRoutePattern = 'pct';
 
     /**
      * @param DatagridMapper $datagridMapper
@@ -39,7 +41,7 @@ class ProcedimentoAdmin extends AbstractAdmin
         $listMapper
 //            ->add('id')
 
-            ->addIdentifier('paciente', 'string', ['label' => 'Nome do Paciente'])
+            ->add('paciente', 'string', ['label' => 'Nome do Paciente'])
             ->add('setor', 'choice', array(
                     'editable'            => true,
                     'class'               => 'AppBundle:Setor',
@@ -71,8 +73,9 @@ class ProcedimentoAdmin extends AbstractAdmin
                 'property' => 'nome',
                 'required' => false
             ))
-            ->add('tempoEstimado','text',['required' => false])
-            ->add('nome', 'text', ['label' => 'Descrição Procedimento(Observações)','required' => false]);
+//            ->add('tempoEstimado','text',['required' => false])
+//            ->add('nome', 'text', ['label' => 'Descrição Procedimento(Observações)','required' => false])
+        ;
     }
 
     /**
@@ -86,5 +89,10 @@ class ProcedimentoAdmin extends AbstractAdmin
             ->add('tempoEstimado')
             ->add('paciente.nome')
             ->add('setor.name');
+    }
+
+    protected function configureRoutes(RouteCollection  $collection)
+    {
+        $collection->remove('delete');
     }
 }

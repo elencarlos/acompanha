@@ -55,8 +55,11 @@ class Setor
         $this->nome = $nome;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->nome;
+        return $this->nome?$this->nome:"";
     }
 }

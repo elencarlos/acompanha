@@ -10,12 +10,12 @@ services:
         class: AppBundle\Admin\PacienteAdmin
         arguments: [~, AppBundle\Entity\Paciente, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Pessoa }
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Pessoa, label_catalogue: AppBundle }
         public: true
 
     app.admin.setor:
         class: AppBundle\Admin\SetorAdmin
         arguments: [~, AppBundle\Entity\Setor, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Setor }
+            - { name: sonata.admin, manager_type: orm, group: admin, show_in_dashboard: false, label: Cadastro de Setor, label_catalogue: AppBundle }
         public: true

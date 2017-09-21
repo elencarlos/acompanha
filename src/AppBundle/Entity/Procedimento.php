@@ -149,4 +149,9 @@ class Procedimento
     {
         return $this->setor;
     }
+
+    public function __toString()
+    {
+        return $this->paciente?$this->paciente.' - '.$this->getSetor().$this->getNome():'';
+    }
 }

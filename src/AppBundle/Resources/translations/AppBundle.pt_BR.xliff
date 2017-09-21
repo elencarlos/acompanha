@@ -10,6 +10,14 @@
                 <source>Procedimento Create</source>
                 <target>Cadastro de Paciente</target>
             </trans-unit>
+            <trans-unit id="Setor List">
+                <source>Setor List</source>
+                <target>Lista de Setores</target>
+            </trans-unit>
+            <trans-unit id="messages">
+                <source>Action</source>
+                <target>Ações</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
