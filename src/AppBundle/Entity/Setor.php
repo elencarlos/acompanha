@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Setor
 {
+    const ENCAMINHADO = 4;
     /**
      * @var int
      *

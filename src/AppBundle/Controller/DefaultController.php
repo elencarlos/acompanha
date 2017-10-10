@@ -15,7 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $pacientes = $this->getDoctrine()->getRepository(Procedimento::class )->findAll();
+        $pacientes = $this->getDoctrine()->getRepository(Procedimento::class )->findBy([],['setor'=>'ASC','id'=>'DESC']);
         return $this->render('@App/Default/index.html.twig',['acompanhamentos'=>$pacientes]);
     }
 }
