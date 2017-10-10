@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Acompanhamento</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href="{{ asset('bundles/app/css/styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/avanzuadmintheme/static/dev/styles/admin-lte-all.css') }}" rel="stylesheet"
+          type="text/css">
+
+</head>
+
+
+<body style="margin: 2em">
+
+<!-- Content here -->
+<div class="row">
+    <div class="logo text-center">
+        <img src="{{ asset('bundles/app/image/acompanha101.png') }}" width="200px"/>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            {% for item in acompanhamentos %}
+                {% set ico = item.setor.imageName %}
+                {% if item.setor.id != 4 and loop.index <=6 %}
+                    <div class="col-lg-4 col-sm-6 col-md-4">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading dark-gray">
+                                    <i class="fa">
+                                        <img width="50px" src="{{ asset('bundles/app/image/'~ico~'.png') }}"/>
+                                    </i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-gray">
+                                <div class="circle-tile-number text-faded">
+                                    {{ item.paciente }}
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <div class="circle-tile-description text-bold">
+                                    {{ item.setor.nome }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% elseif item.setor.id != 4 %}
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        <div class="alert alert-info" role="alert">
+                            <strong>{{ item.paciente }} </strong> / {{ item.setor.nome }}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        <div class="alert alert-success" role="alert">
+                            <strong>{{ item.paciente }} </strong> / {{ item.setor.nome }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Procedimento;
+use AppBundle\Entity\Setor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +15,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->redirectToRoute('sonata_admin_dashboard');
+        $pacientes = $this->getDoctrine()->getRepository(Procedimento::class )->findAll();
+        return $this->render('@App/Default/index.html.twig',['acompanhamentos'=>$pacientes]);
     }
 }

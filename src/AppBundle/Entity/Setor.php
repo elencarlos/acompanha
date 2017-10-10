@@ -17,7 +17,6 @@ class Setor
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -28,7 +27,9 @@ class Setor
      */
     private $nome;
 
-
+    public function setId($id){
+        $this->id = $id;
+    }
     /**
      * Get id
      *
@@ -53,6 +54,11 @@ class Setor
     public function setNome($nome)
     {
         $this->nome = $nome;
+    }
+
+    public function getImageName(){
+        $valor = strtolower(str_replace(" ","_",preg_replace("/&([a-z])[a-z]+;/i", "$1", htmlentities(trim($this->nome)))));
+        return $valor?$valor:"";
     }
 
     /**

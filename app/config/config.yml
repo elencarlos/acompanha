@@ -122,8 +122,7 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
 
 sonata_admin:
-    title:      'Acompanha'
-    title_logo: /bundles/app/image/pdi.png
+    title_logo: /bundles/app/image/acompanha101.png
     options:
         use_select2: true
         use_icheck: true

@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class SetorAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'AppBundle';
+    protected $baseRoutePattern = 'setor';
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -47,6 +48,7 @@ class SetorAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('id')
             ->add('nome')
         ;
     }
