@@ -1,0 +1,35 @@
+<div class="logo text-center">
+    <img src="{{ asset('bundles/app/image/acompanha101.png') }}" width="200px"/>
+</div>
+<div class="autoplay" data-slick='{"slidesToShow": 1'>
+    {% for item in acompanhamentos %}
+        {% set ico = item.setor.imageName %}
+
+        {% if(loop.index == 1) or (loop.index-1) is divisible by(9) %}
+            <div>
+        {% endif %}
+        <div class="col-lg-4 col-sm-6 col-md-4">
+            <div class="circle-tile">
+                <a href="#">
+                    <div class="circle-tile-heading dark-gray">
+                        <i class="fa">
+                            <img width="50px" src="{{ asset('bundles/app/image/'~ico~'.png') }}"/>
+                        </i>
+                    </div>
+                </a>
+                <div class="circle-tile-content dark-gray">
+                    <div class="circle-tile-number text-faded">
+                        {{ item.paciente }}
+                        <span id="sparklineA"></span>
+                    </div>
+                    <div class="circle-tile-description text-bold">
+                        {{ item.setor.nome }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if(loop.last  or loop.index is divisible by(9)) %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>

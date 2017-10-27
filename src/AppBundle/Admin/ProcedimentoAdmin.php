@@ -93,6 +93,5 @@ class ProcedimentoAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection  $collection)
     {
-        $collection->remove('delete');
     }
 }
