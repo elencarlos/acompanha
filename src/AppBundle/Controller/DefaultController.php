@@ -16,17 +16,19 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $numberItem = 12;
         $pacientes = $this->getDoctrine()->getRepository(Procedimento::class )->findBy([],['setor'=>'ASC','id'=>'DESC']);
-        $pages = ceil(count($pacientes)/9);
-        return $this->render('@App/Default/index.html.twig',['acompanhamentos'=>$pacientes,'pages'=>$pages]);
+        $pages = ceil(count($pacientes)/$numberItem);
+        return $this->render('@App/Default/pacientes.html.twig',['acompanhamentos'=>$pacientes,'pages'=>$pages,'number_item'=>$numberItem]);
     }
 
     /**
      * @Route("/atualiza", name="atualiza")
      */
     public function atualizaPacientesAction(Request $request){
+        $numberItem = 12;
         $pacientes = $this->getDoctrine()->getRepository(Procedimento::class )->findBy([],['setor'=>'ASC','id'=>'DESC']);
-        $pages = ceil(count($pacientes)/9);
-        return $this->render('@App/Default/pacientes.html.twig',['acompanhamentos'=>$pacientes,'pages'=>$pages]);
+        $pages = ceil(count($pacientes)/$numberItem);
+        return $this->render('@App/Default/pacientes.html.twig',['acompanhamentos'=>$pacientes,'pages'=>$pages,'number_item'=>$numberItem]);
     }
 }

@@ -5,59 +5,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Acompanhamento</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bundles/app/css/font-awesome.min.css') }}" rel="stylesheet"
           type="text/css">
     <link href="{{ asset('bundles/app/css/styles.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('bundles/avanzuadmintheme/static/dev/styles/admin-lte-all.css') }}" rel="stylesheet"
           type="text/css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery-1.11.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery-migrate-1.2.1.min.js') }}"></script>
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/slick.css') }}"/>
     <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"/>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('bundles/app/css/slick-theme.css') }}"/>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/slick.min.js') }}"></script>
     {#<script src="{{ asset('bundles/sonataadmin/vendor/jquery/dist/jquery.min.js') }}"></script>#}
 
 </head>
 <script>
-    {#function executeQuery() {#}
-        $.ajax({
-            url: '{{ path('atualiza') }}',
-            success: function(data) {
-
-            }
-        });
-        {#setTimeout(executeQuery, 5000); // you could choose not to continue on failure...#}
-    {#}#}
-
-    {#function showPages(data) {#}
-        {#$('#dados').html('<div data-slick=\'{"slidesToShow": 4, "slidesToScroll": 4}\'>\n' +#}
-            {#'  <div><h3>1</h3></div>\n' +#}
-            {#'  <div><h3>2</h3></div>\n' +#}
-            {#'  <div><h3>3</h3></div>\n' +#}
-            {#'  <div><h3>4</h3></div>\n' +#}
-            {#'  <div><h3>5</h3></div>\n' +#}
-            {#'  <div><h3>6</h3></div>\n' +#}
-            {#'</div>');#}
-    {#}#}
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.autoplay').slick({
             slidesToShow: 1,
             autoplay: true,
-            autoplaySpeed: 10000,
+            autoplaySpeed: 6000,
         });
         var auto_atualiza = setInterval(function () {
             $.ajax({
                 url: '{{ path('atualiza') }}',
-                success: function(data) {
-                        $('#pacientes').html(data);
+                success: function (data) {
+                    var $result = $(data).filter('#pacientes');
+                    $('#pacientes').html($result);
                     $('.autoplay').slick({
                         slidesToShow: 1,
                         autoplay: true,
-                        autoplaySpeed: 10000,
+                        autoplaySpeed: 6000,
                     });
                 }
             });
@@ -71,40 +52,7 @@
 <body style="margin: 2em">
 <!-- Content here -->
 <div id="pacientes" class="row">
-    <div class="logo text-center">
-        <img src="{{ asset('bundles/app/image/acompanha101.png') }}" width="200px"/>
-    </div>
-    <div class="autoplay" data-slick='{"slidesToShow": 1'>
-        {% for item in acompanhamentos %}
-            {% set ico = item.setor.imageName %}
-
-            {% if(loop.index == 1) or (loop.index-1) is divisible by(9) %}
-                <div>
-            {% endif %}
-            <div class="col-lg-4 col-sm-6 col-md-4">
-                <div class="circle-tile">
-                    <a href="#">
-                        <div class="circle-tile-heading dark-gray">
-                            <i class="fa">
-                                <img width="50px" src="{{ asset('bundles/app/image/'~ico~'.png') }}"/>
-                            </i>
-                        </div>
-                    </a>
-                    <div class="circle-tile-content dark-gray">
-                        <div class="circle-tile-number text-faded">
-                            {{ item.paciente }}
-                            <span id="sparklineA"></span>
-                        </div>
-                        <div class="circle-tile-description text-bold">
-                            {{ item.setor.nome }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% if(loop.last  or loop.index is divisible by(9)) %}
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% block pacientes %}
+    {% endblock %}
 </div>
 </body>
