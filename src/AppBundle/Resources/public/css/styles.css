@@ -828,6 +828,12 @@ body{background-color: #ecf0f1;}
     background-color: #7f8c8d;
 }
 
+.light-blue {
+    background-color: #f5f5ef;
+}
+
+
+
 .gray {
     background-color: #95a5a6;
 }
@@ -867,7 +873,7 @@ body{background-color: #ecf0f1;}
 }
 
 .text-faded {
-    color: rgba(255,255,255,0.7);
+    color: #006bb3;
 }
 
 
@@ -884,7 +890,7 @@ body{background-color: #ecf0f1;}
 }
 
 .text-faded {
-    color: rgba(255,255,255,0.7);
+    color: #006bb3;
 }
 
 .circle-tile-number {

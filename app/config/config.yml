@@ -159,3 +159,5 @@ sonata_admin:
                     label: Cadastro
                     icon:  '<i class="fa fa-cogs"></i>'
                     roles: [ROLE_ADMIN]
+avanzu_admin_theme:
+    bower_bin: C:\Users\elenc\AppData\Roaming\npm\bower

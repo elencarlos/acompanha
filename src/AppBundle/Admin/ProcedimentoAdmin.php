@@ -94,4 +94,12 @@ class ProcedimentoAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection  $collection)
     {
     }
+
+    public function getBatchActions()
+    {
+        $actions = parent::getBatchActions();
+        unset($actions['delete']);
+
+        return $actions;
+    }
 }
