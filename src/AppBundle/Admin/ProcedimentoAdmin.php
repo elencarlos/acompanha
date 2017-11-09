@@ -17,6 +17,17 @@ class ProcedimentoAdmin extends AbstractAdmin
     protected $translationDomain = 'AppBundle';
     protected $baseRoutePattern = 'pct';
 
+    protected $datagridValues = array(
+
+        // display the first page (default = 1)
+        '_page' => 1,
+        // reverse order (default = 'ASC')
+        '_sort_order' => 'DESC',
+        // name of the ordered field (default = the model's id field, if any)
+        '_sort_by' => 'id',
+    );
+
+    protected $maxPerPage = 24;
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -85,9 +96,7 @@ class ProcedimentoAdmin extends AbstractAdmin
     {
         $showMapper
             ->add('id')
-            ->add('nome')
-            ->add('tempoEstimado')
-            ->add('paciente.nome')
+            ->add('paciente')
             ->add('setor.name');
     }
 
